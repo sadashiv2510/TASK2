@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-TASK-5</title>
+    <style>
+        .invalid {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div>
+            <table border="0" cellspacing="10">
+                <tr>
+                    <td style="float:right;">
+                        Name:
+                    </td>
+                    <td>
+                        <input type="text" id="name">
+                        <span class="name-invalid invalid" style="margin-left: 20px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="float:right;">
+                        Email:
+                    </td>
+                    <td>
+                        <input type="email" id="email">
+                        <span class="email-invalid invalid" style="margin-left: 20px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="float:right;">
+                        Website:
+                    </td>
+                    <td>
+                        <input type="text" id="website">
+                        <span class="url-invalid invalid" style="margin-left: 20px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="float:right;">
+                        Message:
+                    </td>
+                    <td>
+                        <textarea name="message" id="message" cols="25" rows="5"></textarea>
+                        <span class="message-invalid invalid" style="margin-left: 20px; position:relative; top:-70px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" onclick="validateForm()">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+    <script>
+        function validateForm() {
+            let isValid = true;
+            
+            // Validate Name
+            const name = document.getElementById('name').value;
+            const nameInvalid = document.querySelector('.name-invalid');
+            if (name.trim() === '') {
+                nameInvalid.textContent = 'Name is required';
+                isValid = false;
+            } else {
+                nameInvalid.textContent = '';
+            }
+            
+            // Validate Email
+            const email = document.getElementById('email').value;
+            const emailInvalid = document.querySelector('.email-invalid');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailInvalid.textContent = 'Invalid email';
+                isValid = false;
+            } else {
+                emailInvalid.textContent = '';
+            }
+            
+            // Validate Website
+            const website = document.getElementById('website').value;
+            const urlInvalid = document.querySelector('.url-invalid');
+            const urlPattern = /^(https?:\/\/)?([^\s$.?#].[^\s]*)$/i;
+            if (website.trim() !== '' && !urlPattern.test(website)) {
+                urlInvalid.textContent = 'Invalid URL';
+                isValid = false;
+            } else {
+                urlInvalid.textContent = '';
+            }
+            
+            // Validate Message
+            const message = document.getElementById('message').value;
+            const messageInvalid = document.querySelector('.message-invalid');
+            if (message.trim() === '') {
+                messageInvalid.textContent = 'Message is required';
+                isValid = false;
+            } else {
+                messageInvalid.textContent = '';
+            }
+            
+            if (isValid) {
+                alert('Form submitted successfully!');
+            }
+        }
+    </script>
+</body>
+</html>
